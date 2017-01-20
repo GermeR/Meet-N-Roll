@@ -27,7 +27,7 @@ if echo $pd | grep 1 >/dev/null && echo $pf | grep 0 >/dev/null
 then
 	for i in $(ls $pa)
 	do
-		cd $i 2>/dev/null && echo -e ${UDIR}$PWD/${UDIR} && ultraLs -d $pc && cd ..
+		cd $i 2>/dev/null && echo -e ${UDIR}$PWD/${UDIR} && ./ultraLs -d $pc && cd ..
 	done
 fi
 
@@ -35,7 +35,7 @@ if echo $pd | grep 0 >/dev/null && echo $pf | grep 1 >/dev/null
 then
 	for i in $(ls $pa)
 	do
-		cd $i 2>/dev/null && ultraLs -f $pc && cd ..
+		cd $i 2>/dev/null && ./ultraLs -f $pc && cd ..
 		cd $i 2>/dev/null && cd .. || echo -e ${UFIL}$PWD/$i${UFIL}
 	done
 fi
@@ -44,7 +44,7 @@ if echo $pd | grep $pf >/dev/null
 then
 	for i in $(ls $pa)
 	do
-		cd $i 2>/dev/null && echo -e ${UDIR}$PWD/${UDIR} && ultraLs -df $pc && cd ..
+		cd $i 2>/dev/null && echo -e ${UDIR}$PWD/${UDIR} && ./ultraLs -df $pc && cd ..
 		cd $i 2>/dev/null && cd .. || echo -e ${UFIL}$PWD/$i${UFIL}
 	done
 fi
