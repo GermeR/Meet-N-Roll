@@ -10,7 +10,7 @@ public class Personne {
 	private String mail;
 	private Date naiss;
 	
-	public Personne(String login, String prenom, String nom, String mail, Date naiss) {
+	public Personne(String login, String mail, Date naiss, String nom, String prenom) {
 		super();
 		this.login = login;
 		this.prenom = prenom;

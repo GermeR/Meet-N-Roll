@@ -3,10 +3,12 @@ package web.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +45,7 @@ public class ServletLogin extends HttpServlet {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			if (rs.next()){
-				session.setAttribute("personne", new Personne(req.getParameter("login"), null, null, null, null, null));
+				session.setAttribute("personne", new Personne(rs.getString(1), rs.getString(3), null, rs.getString(5), rs.getString(6)));
 				res.sendRedirect("../servlet/profil");
 			}
 			else
