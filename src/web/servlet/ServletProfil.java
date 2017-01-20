@@ -40,14 +40,26 @@ public class ServletProfil extends HttpServlet {
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM joueurs where login='" + p.getLogin() + "';";
-
+		
+		out.println("<!DOCTYPE html><html lang='fr'>"
+				+ "<head><meta charset='utf-8'><meta http-equiv='X-UA-Compatible' content='IE=edge'><meta name='viewport' content='width=device-width, initial-scale=1'>"
+				+ "<title>Menu</title>"
+				+ "<!-- Bootstrap core CSS --><link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>"
+				+ "</head>"
+				+ "<div class='container'>"
+				+ "<div class='page-header'>"
+				+ "<h1>PROFIL</h1>"
+				+ "<div class='row'>"
+				+ "<div class='col-xs-12'>"
+				+ "<div class='col-sm-10'>"
+				+ "</div></div></div></body></html>");
 		try {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(URL, NOM, MDP);
 			stmt = con.createStatement();
 			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
-			out.println("<TABLE>");
+			out.println("<TABLE class=\"table table-striped\">");
 			out.println("<th>jdr favoris</th>");
 			while(rs.next())
 				out.println("<tr><td>"+rs.getString(2)+"</td></tr>");
