@@ -45,7 +45,7 @@ public class ServletLogin extends HttpServlet {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			if (rs.next()){
-				session.setAttribute("personne", new Personne(rs.getString(1), rs.getString(3), null, rs.getString(5), rs.getString(6)));
+				session.setAttribute("personne", new Personne(rs.getString(1), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6)));
 				res.sendRedirect("../servlet/profil");
 			}
 			else
