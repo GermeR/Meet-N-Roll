@@ -1,0 +1,7 @@
+Trucs a faire:
+
+	1)Page de profil
+	2)Connection avec identifiants
+	3)Rencontre
+	4)Envoi de message
+	5)JDR Live
