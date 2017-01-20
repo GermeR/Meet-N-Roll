@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CLASSPATH=$CLASSPATH:($PWD/ultraLs)
+
 chemin=""
 pd=0
 pf=0
