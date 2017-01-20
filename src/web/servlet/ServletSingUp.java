@@ -37,15 +37,20 @@ public class ServletSingUp extends HttpServlet {
 		String sql = "SELECT * FROM personne WHERE login='"
 				+ req.getParameter("login") + "';";
 
-		if (req.getParameter("password").equals(req.getParameter("repassword"))) {
-
+		if (!req.getParameter("login").equals("")
+				&& !req.getParameter("password").equals("")
+				&& !req.getParameter("mail").equals("")
+				&& req.getParameter("password").equals(
+						req.getParameter("repassword"))) {
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
 				stmt = con.createStatement();
 				rs = stmt.executeQuery(sql);
 				if (rs.next()) {
-					session.setAttribute("personne",new Personne(req.getParameter("login"), null, null,null, null));
+					session.setAttribute("personne",
+							new Personne(req.getParameter("login"), null, null,
+									null, null));
 				} else {
 					stmt.execute("insert into personne(login,nom,prenom,mail,naiss,password) values('"
 							+ req.getParameter("login")
