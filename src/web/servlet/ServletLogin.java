@@ -57,5 +57,11 @@ public class ServletLogin extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+			}
+		}
 	}
 }
