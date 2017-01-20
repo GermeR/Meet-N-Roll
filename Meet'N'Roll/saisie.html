@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+
+	<title>Saisie</title>
+</head>
+<body><center>
+	<h2>Pages</h2>
+<nav>
+<ul>
+  <li><p><a href="servlet/Lister"/>Lister</p></li>
+  <li><p><a href="servlet/Synthese"/>Synthese</p></li>
+  <li><p><a href="saisie.html"/>Saisie</p></li>
+</ul>
+</nav>
+
+	<form action="servlet/Inserer" method="post">
+		<p>nom<input type="text" name="nom"></p>
+		<p>taille<input type="text" name="taille"></p>
+		<p>chaises<input type="text" name="chaises"></p>
+		<p>portes<input type="text" name="portes"></p>
+		<p>fenetres<input type="text" name="fenetres"></p>
+		<input type="submit" value="send">
+	</form>
+</body>

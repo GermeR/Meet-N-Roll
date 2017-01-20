@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Page de login</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<div class="page-header">
+<center>
+<h1 class="display-1">GARDE TA BOURSE.COM</h1>
+<p>
+Trop d'absences injustifiés ? Vous séchez tellement que vous avez perdu le fil ? Plus de soucis avec GARDE TA BOURSE.COM !
+<br>
+Vous serez en mesure de consulter vos absences en direct ! N'attendez plus et inscrivez vous !
+</p>
+</center>
+</div>
+<div class="row">
+<div class="col-xs-6 col-xs-offset-3">
+<form id="loginForm" action="servlet/log" method="POST">
+<div class="form-group">
+<label class="control-label" for="login">Login</label>
+<input id="login" class="form-control" type="text" value="" name="login">
+</div>
+<div class="form-group">
+<label class="control-label" for="password">Mot de passe</label>
+<input id="password" class="form-control" type="password" value="" name="mdp">
+</div>
+<button class="btn btn-success btn-block" type="submit">Connexion</button>
+<a class="btn btn-default btn-block" href="new.html">Créer un compte !</a>
+</form>
+</div>
+</div>
+</div>
+</body>
+</html>

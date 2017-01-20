@@ -1,0 +1,12 @@
+ul {
+	background-color: black;
+	float: left;
+	color : white;
+	border-top: 0px;
+	text-align: top;
+	vertical-align: top;
+}
+
+.p {
+	color : white;
+}
