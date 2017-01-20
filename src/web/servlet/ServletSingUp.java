@@ -49,8 +49,17 @@ public class ServletSingUp extends HttpServlet {
 							new Personne(req.getParameter("login"), null, null,
 									null, null, null));
 				} else {
-					stmt.execute("insert into personne values('"
-							+ req.getParameter("login") + "','"
+					stmt.execute("insert into personne(login,nom,prenom,mail,naiss,password) values('"
+							+ req.getParameter("login")
+							+ "','"
+							+ req.getParameter("nom")
+							+ "','"
+							+ req.getParameter("prenom")
+							+ "','"
+							+ req.getParameter("mail")
+							+ "','"
+							+ req.getParameter("naiss")
+							+ "','"
 							+ req.getParameter("password") + "');");
 				}
 				res.sendRedirect("../login.html");
@@ -65,7 +74,7 @@ public class ServletSingUp extends HttpServlet {
 				} catch (SQLException e) {
 				}
 			}
-		}else
+		} else
 			res.sendRedirect("../new.html");
 	}
 }
