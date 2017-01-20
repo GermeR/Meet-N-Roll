@@ -1,6 +1,7 @@
 package web.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,33 +19,43 @@ import web.struct.Personne;
 
 @WebServlet("/servlet/log")
 public class ServletLogin extends HttpServlet {
-	
+
 	static final String NOM = "kwin";
 	static final String MDP = "moi";
 	static final String URL = "jdbc:postgresql://kwinserv.ddns.net:22042/MeetNRoll";
-	
+
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
+		PrintWriter out = res.getWriter();
 
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM personne ;";
-		System.out.println(sql);
+		String sql = "SELECT * FROM personne WHERE login='" + req.getParameter("login") + "' and password='"
+				+ req.getParameter("mdp") + "';";
+		out.println(sql);
+
 		try {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(URL, NOM, MDP);
 			stmt = con.createStatement();
 			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
-			while(rs.next())
-				System.out.println(rs.getString(1)+" "+rs.getString(2));
+			if (rs.next()){
+				session.setAttribute("personne", new Personne(req.getParameter("login"), null, null, null, null, null));
+				res.sendRedirect("../servlet/profil");
+			}
+			// out.println(rs.getString(1)+" "+rs.getString(2));
+
+			else
+				res.sendRedirect("../login.html");
+
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 }
