@@ -14,6 +14,7 @@
 				<h1 class="display-1">Meet'N'Roll</h1>
 				<p>
 					Inscrivez vous dès aujourd'hui pour commencer une nouvelle aventure avec des milliers de PNJ partageant votre passion !!
+					(* : champs obligatoires)
 				</p>
 			</center>
 	</div>
@@ -21,15 +22,31 @@
 		<div class="col-xs-6 col-xs-offset-3">
 			<form id="signupFrom" action="servlet/singup" method="POST">
 				<div class="form-group">
-					<label class="control-label" for="login">Login</label>
-					<input id="login" class="form-control" type="text" value="0" name="login">
+					<label class="control-label" for="login">Login *</label>
+					<input id="login" class="form-control" type="text" value="" name="login">
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="password">Mot de passe</label>
+					<label class="control-label" for="password">Prenom</label>
+					<input id="password" class="form-control" type="text" value="" name="prenom">
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="password">Nom</label>
+					<input id="password" class="form-control" type="text" value="" name="nom">
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="password">Date de Naissance</label>
+					<input id="password" class="form-control" type="date" value="" name="naiss">
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="password">Mail</label>
+					<input id="password" class="form-control" type="text" value="" name="mail">
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="password">Mot de passe *</label>
 					<input id="password" class="form-control" type="password" value="" name="password">
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="password">Quoi je n'ai pas bien compris : Quel est votre Mot de Passe ?</label>
+					<label class="control-label" for="password">Quoi je n'ai pas bien compris : Quel est votre Mot de Passe ? *</label>
 					<input id="password" class="form-control" type="password" value="" name="repassword">
 				</div>
 				<button class="btn btn-success btn-block" type="submit">Inscrivez Vous !!!</button>
