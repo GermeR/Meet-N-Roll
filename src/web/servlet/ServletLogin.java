@@ -19,9 +19,9 @@ import web.struct.Personne;
 @WebServlet("/servlet/log")
 public class ServletLogin extends HttpServlet {
 	
-	static final String NOM = "germer";
+	static final String NOM = "kwin";
 	static final String MDP = "moi";
-	static final String URL = "jdbc:postgresql://psqlserv/n3p1";
+	static final String URL = "jdbc:postgresql://kwinserv.ddns.net:22042/MeetNRoll";
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -31,8 +31,7 @@ public class ServletLogin extends HttpServlet {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM personne WHERE login='" + req.getParameter("login") + "' AND mdp='"
-				+ req.getParameter("mdp") + "' ;";
+		String sql = "SELECT * FROM personne ;";
 		System.out.println(sql);
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -40,23 +39,12 @@ public class ServletLogin extends HttpServlet {
 			stmt = con.createStatement();
 			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
+			while(rs.next())
+				System.out.println(rs.getString(1)+" "+rs.getString(2));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		try {
-			if (rs.next()) {
-				for(int i =1; i<= rs.getMetaData().getColumnCount();i++)
-				System.out.println("rs"+i+" : "+rs.getString(i));
-				session.setAttribute("login", req.getParameter("login"));
-				session.setAttribute("personne", new Personne(rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		System.out.println(session.getAttribute("personne"));
-		res.sendRedirect("../menu.jsp");
 	}	
 }
