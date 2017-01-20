@@ -41,14 +41,11 @@ public class ServletLogin extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(URL, NOM, MDP);
 			stmt = con.createStatement();
-			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			if (rs.next()){
 				session.setAttribute("personne", new Personne(req.getParameter("login"), null, null, null, null, null));
 				res.sendRedirect("../servlet/profil");
 			}
-			// out.println(rs.getString(1)+" "+rs.getString(2));
-
 			else
 				res.sendRedirect("../login.html");
 
