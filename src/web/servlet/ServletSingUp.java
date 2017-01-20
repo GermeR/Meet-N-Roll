@@ -45,9 +45,9 @@ public class ServletSingUp extends HttpServlet {
 				stmt = con.createStatement();
 				rs = stmt.executeQuery(sql);
 				if (rs.next()) {
-					session.setAttribute("personne",
+					/*session.setAttribute("personne",
 							new Personne(req.getParameter("login"), null, null,
-									null, null, null));
+									null, null, null));*/
 				} else {
 					stmt.execute("insert into personne(login,nom,prenom,mail,naiss,password) values('"
 							+ req.getParameter("login")
