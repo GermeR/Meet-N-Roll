@@ -64,9 +64,15 @@ public class ServletProfil extends HttpServlet {
 				stmt.execute("insert into joueurs values('" + p.getLogin() + "','" + req.getParameter("add") + "');");
 				res.sendRedirect("profil");
 			}
+<<<<<<< HEAD
 			if (req.getParameter("del") != null && req.getParameter("del").length() > 1) {
 				System.out.println("delete from joueurs where type='" + req.getParameter("del") + "';");
 				stmt.execute("delete from joueurs where type='" + req.getParameter("del") + "';");
+=======
+			if (req.getParameter("del") != null && req.getParameter("del").length()>1) {
+				System.out.println("delete from joueurs where type='"+req.getParameter("del") + "';");
+				stmt.execute("delete from joueurs where login='"+p.getLogin()+"' and type='"+req.getParameter("del") + "';");
+>>>>>>> 854455125ce87796fa26076fc2c492d7799fe8aa
 				res.sendRedirect("profil");
 			}
 			rs = stmt.executeQuery(sql);
