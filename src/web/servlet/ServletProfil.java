@@ -72,7 +72,7 @@ public class ServletProfil extends HttpServlet {
 			}
 			if (req.getParameter("del") != null && req.getParameter("del").length()>1) {
 				System.out.println("delete from joueurs where type='"+req.getParameter("del") + "';");
-				stmt.execute("delete from joueurs where type='"+req.getParameter("del") + "';");
+				stmt.execute("delete from joueurs where login='"+p.getLogin()+"' and type='"+req.getParameter("del") + "';");
 				res.sendRedirect("profil");
 			}
 			System.out.println(sql);
