@@ -43,8 +43,26 @@ public class ServletProfil extends HttpServlet {
 			Statement stmt = null;
 			ResultSet rs = null;
 			String sql = "SELECT * FROM joueurs where login='" + p.getLogin() + "';";
-			out.println(
-					"<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"><title>Creation de Compte</title><link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"></head><body><div class=\"container\"><div class=\"page-header\"><center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center></div><div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\"><a href=\"log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a></div></div><div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\">");
+			out.println("<!DOCTYPE html>"
+					+ "<html lang=\"fr\">"
+					+ "<head><meta charset=\"utf-8\">"
+					+ "<meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
+					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
+					+ "<title>Creation de Compte</title>"
+					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
+					+ "</head>"
+					+ "<body>"
+					+ "<div class=\"container\">"
+					+ "<div class=\"page-header\">"
+					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center>"
+					+ "</div>"
+					+ "<div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\">"
+					+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>"
+					+ "<a href=\"log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a>"
+					+ "</div>"
+					+ "</div>"
+					+ "<div class=\"row\">"
+					+ "<div class=\"col-xs-6 col-xs-offset-3\">");
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
