@@ -28,12 +28,12 @@ public class ServletProfil extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
-		
-		if(session == null)
+
+		if (session == null)
 			System.out.println("session = null");
-		if(session.getAttribute("personne") == null)
+		if (session.getAttribute("personne") == null)
 			System.out.println("personne = null");
-		if (session == null || session.getAttribute("personne")== null) {
+		if (session == null || session.getAttribute("personne") == null) {
 			res.sendRedirect("../login.html");
 		} else {
 
@@ -43,32 +43,18 @@ public class ServletProfil extends HttpServlet {
 			Statement stmt = null;
 			ResultSet rs = null;
 			String sql = "SELECT * FROM joueurs where login='" + p.getLogin() + "';";
-			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">" + "<head>"
-					+ "		<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />"
-					+ "		<meta http-equiv='X-UA-Compatible' content='IE=edge'>"
-					+ "		<meta name='viewport' content='width=device-width, initial-scale=1'>"
-					+ "		<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">" + "<title>Meet'N'Role: Profil</title>"
-					+ "</head>" + "<body>" + "<center><h1 class=\"display-1\">Meet\'N\'Roll : Profil</h1></center>"
-					// login
-					+ "<h2>" + p.getLogin() + "</h2>"
-					// nom
-					+ "<p>" + p.getNom() + "</p>"
-					// Prenom
-					+ "<p>" + p.getPrenom() + "</p>" + "<table>");
+			out.println(
+					"<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\"><meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"><title>Creation de Compte</title><link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"></head><body><div class=\"container\"><div class=\"page-header\"><center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center></div><div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\"><a href=\"servlet/log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a></div></div><div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\">");
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
 				stmt = con.createStatement();
-				System.out.println("add" + req.getParameter("add") == null);
 				if (req.getParameter("add") != null && req.getParameter("add").length() > 1) {
-					System.out.println(
-							"insert into joueurs values('" + p.getLogin() + "','" + req.getParameter("add") + "');");
 					stmt.execute(
 							"insert into joueurs values('" + p.getLogin() + "','" + req.getParameter("add") + "');");
 					res.sendRedirect("profil");
 				}
 				if (req.getParameter("del") != null && req.getParameter("del").length() > 1) {
-					System.out.println("delete from joueurs where type='" + req.getParameter("del") + "';");
 					stmt.execute("delete from joueurs where login='" + p.getLogin() + "' and type='"
 							+ req.getParameter("del") + "';");
 
@@ -76,23 +62,21 @@ public class ServletProfil extends HttpServlet {
 				}
 
 				rs = stmt.executeQuery(sql);
-				out.println("<table>");
+				out.println("<table class=\"table table-striped\">");
 				out.println("<th>JDR favoris</th>");
 				while (rs.next())
-					out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2))
-							+ "</td></tr>");
+					out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2)) +"</td></tr>");
 				out.println("</table>");
 				sql = "select * from jeux where type not in (select type from joueurs where login ='" + p.getLogin()
 						+ "');";
 				rs = stmt.executeQuery(sql);
-				out.println("<table>");
+				out.println("<table class=\"table table-striped\">");
 				out.println("<th> JDR DISPONIBLES </th>");
 				while (rs.next())
 					out.println("<tr><td><a href=profil?add=" + rs.getString(1) + ">" + fromMatch(rs.getString(1))
 							+ "</a></td></tr>");
 				out.println("</table>");
 
-				out.println("<a href=../modifProfil.jsp> Modifier le profil</a>");
 				out.print("</div></div>");
 				out.println("</body></html>");
 			} catch (
