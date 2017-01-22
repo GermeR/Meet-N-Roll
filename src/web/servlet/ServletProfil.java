@@ -54,49 +54,46 @@ public class ServletProfil extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			con = DriverManager.getConnection(URL, NOM, MDP);
 			stmt = con.createStatement();
-			System.out.println(req.getParameter("add") == null);
+			System.out.println("add" + req.getParameter("add") == null);
 			if (req.getParameter("add") != null && req.getParameter("add").length() > 1) {
 				System.out.println(
 						"insert into joueurs values('" + p.getLogin() + "','" + req.getParameter("add") + "');");
 				stmt.execute("insert into joueurs values('" + p.getLogin() + "','" + req.getParameter("add") + "');");
 				res.sendRedirect("profil");
 			}
-			if (req.getParameter("del") != null && req.getParameter("del").length() > 1)
-
-			{
+			if (req.getParameter("del") != null && req.getParameter("del").length() > 1) {
 				System.out.println("delete from joueurs where type='" + req.getParameter("del") + "';");
-				stmt.execute("delete from joueurs where type='" + req.getParameter("del") + "';");
+				stmt.execute("delete from joueurs where login='" + p.getLogin() + "' and type='"
+						+ req.getParameter("del") + "';");
 
-				if (req.getParameter("del") != null && req.getParameter("del").length() > 1) {
-					System.out.println("delete from joueurs where type='" + req.getParameter("del") + "';");
-					stmt.execute("delete from joueurs where login='" + p.getLogin() + "' and type='"
-							+ req.getParameter("del") + "';");
-
-					res.sendRedirect("profil");
-				}
-
-				rs = stmt.executeQuery(sql);
-				out.println("<center><table>");
-				out.println("<th>JDR favoris</th>");
-				while (rs.next())
-					out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2))
-							+ "</td></tr>");
-				out.println("</table>");
-				sql = "select * from jeux where type not in (select type from joueurs where login ='" + p.getLogin()
-						+ "');";
-				rs = stmt.executeQuery(sql);
-				out.println("<table>");
-				out.println("<th> JDR DISPONIBLES </th>");
-				while (rs.next())
-					out.println("<tr><td><a href=profil?add=" + rs.getString(1) + ">" + fromMatch(rs.getString(1))
-							+ "</a></td></tr>");
-				out.println("</table></center>");
-
-				out.println("<a href=../modifProfil.jsp> Modifier le profil</a>");
-				out.println("</body></html>");
+				res.sendRedirect("profil");
 			}
-		} catch (ClassNotFoundException e) {
+
+			rs = stmt.executeQuery(sql);
+			out.println("<center><table>");
+			out.println("<th>JDR favoris</th>");
+			while (rs.next())
+				out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2))
+						+ "</td></tr>");
+			out.println("</table>");
+			sql = "select * from jeux where type not in (select type from joueurs where login ='" + p.getLogin()
+					+ "');";
+			rs = stmt.executeQuery(sql);
+			out.println("<table>");
+			out.println("<th> JDR DISPONIBLES </th>");
+			while (rs.next())
+				out.println("<tr><td><a href=profil?add=" + rs.getString(1) + ">" + fromMatch(rs.getString(1))
+						+ "</a></td></tr>");
+			out.println("</table></center>");
+
+			out.println("<a href=../modifProfil.jsp> Modifier le profil</a>");
+			out.println("</body></html>");
+		} catch (
+
+		ClassNotFoundException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
