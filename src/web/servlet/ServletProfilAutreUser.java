@@ -42,7 +42,9 @@ public class ServletProfilAutreUser extends HttpServlet {
 			Connection con = null;
 			Statement stmt = null;
 			ResultSet rs = null;
-			String sql = "SELECT * FROM joueurs where login='" + req.getParameter("user") + "';";
+			String sql = "SELECT * FROM personne where login='" + req.getParameter("user") + "';";
+			
+			
 			out.println("<!DOCTYPE html>"
 					+ "<html lang=\"fr\">"
 					+ "<head><meta charset=\"utf-8\">"
@@ -54,7 +56,7 @@ public class ServletProfilAutreUser extends HttpServlet {
 					+ "<body>"
 					+ "<div class=\"container\">"
 					+ "<div class=\"page-header\">"
-					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1>"
+					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil de "+ req.getParameter("user") + "</h1>"
 					+ "</center></d"
 					+ "iv>"
 					+ "<div class=\"row\">"
@@ -65,12 +67,26 @@ public class ServletProfilAutreUser extends HttpServlet {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
 				stmt = con.createStatement();
-
 				rs = stmt.executeQuery(sql);
+				
+				if(rs.next()){
+					out.println("<h2>" + rs.getString(1)+ "</h2>");
+					out.println("<p>"+ rs.getString(3) +"</p>");
+					out.println("<p>"+ rs.getString(5) +"</p>");
+					out.println("<p>"+ rs.getString(6) +"</p>");
+				
+				}
+				
+				
+				sql = "SELECT * FROM joueurs where login='" + req.getParameter("user") + "';";
+				rs = stmt.executeQuery(sql);
+				
+				
+				
 				out.println("<table class=\"table table-striped\">");
 				out.println("<th>JDR favoris</th>");
 				while (rs.next())
-					out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2)) +"</td></tr>");
+					out.println("<tr><td>" + fromMatch(rs.getString(2)) +"</td></tr>");
 				out.println("</table>");
 				out.print("</div></div>");
 				out.println("</body></html>");
