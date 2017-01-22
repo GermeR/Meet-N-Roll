@@ -25,38 +25,43 @@ public class ServletLogin extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		
 		HttpSession session = req.getSession();
 		PrintWriter out = res.getWriter();
+		
+		if (req.getParameter("delog") != null && req.getParameter("delog").equals("true"))
+			session.invalidate();
+		
+		if(session==null) {
+			res.sendRedirect("../login.html");
+		} else {
+			Connection con = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM personne WHERE login='" + req.getParameter("login") + "' and password='"
+					+ req.getParameter("mdp") + "';";
+			out.println(sql);
 
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM personne WHERE login='" + req.getParameter("login") + "' and password='"
-				+ req.getParameter("mdp") + "';";
-		out.println(sql);
-
-		try {
-			Class.forName("org.postgresql.Driver");
-			con = DriverManager.getConnection(URL, NOM, MDP);
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
-			if (rs.next()){
-				session.setAttribute("personne", new Personne(rs.getString(1), rs.getString(3), rs.getDate(4), rs.getString(5), rs.getString(6)));
-				res.sendRedirect("../servlet/profil");
-			}
-			else
-				res.sendRedirect("../login.html");
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally {
 			try {
-				con.close();
+				Class.forName("org.postgresql.Driver");
+				con = DriverManager.getConnection(URL, NOM, MDP);
+				stmt = con.createStatement();
+				rs = stmt.executeQuery(sql);
+				if (rs.next()) {
+					session.setAttribute("personne", new Personne(rs.getString(1), rs.getString(3), rs.getDate(4),
+							rs.getString(5), rs.getString(6)));
+					res.sendRedirect("../menu.html");
+				} else
+					res.sendRedirect("../login.html");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 	}

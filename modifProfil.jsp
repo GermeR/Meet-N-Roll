@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="web.struct.Personne" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="java.util.Set" %>
+<@ page import="java.util.Set" >
 
 <!DOCTYPE html>
 <html lang="fr">
