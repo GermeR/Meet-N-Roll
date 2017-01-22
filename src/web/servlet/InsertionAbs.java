@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import web.struct.Personne;
-
 @WebServlet("/servlet/addabs")
 public class InsertionAbs extends HttpServlet {
 

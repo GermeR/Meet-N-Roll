@@ -70,21 +70,21 @@ public class ServletProfil extends HttpServlet {
 			}
 
 			rs = stmt.executeQuery(sql);
-			out.println("<center><table>");
+			out.println("<table><center>");
 			out.println("<th>JDR favoris</th>");
 			while (rs.next())
 				out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2))
 						+ "</td></tr>");
-			out.println("</table>");
+			out.println("</center></table>");
 			sql = "select * from jeux where type not in (select type from joueurs where login ='" + p.getLogin()
 					+ "');";
 			rs = stmt.executeQuery(sql);
-			out.println("<table>");
+			out.println("<table><center>");
 			out.println("<th> JDR DISPONIBLES </th>");
 			while (rs.next())
 				out.println("<tr><td><a href=profil?add=" + rs.getString(1) + ">" + fromMatch(rs.getString(1))
 						+ "</a></td></tr>");
-			out.println("</table></center>");
+			out.println("</center></table>");
 
 			out.println("<a href=../modifProfil.jsp> Modifier le profil</a>");
 			out.println("</body></html>");
@@ -94,6 +94,12 @@ public class ServletProfil extends HttpServlet {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
