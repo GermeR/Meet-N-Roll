@@ -1,7 +1,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="web.struct.Personne" %>
 <%@ page import="java.util.Map" %>
-<@ page import="java.util.Set" >
+<%@ page import="java.util.Set" %>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,10 +20,7 @@
 		<div class="page-header">
 			<center>
 				<h1 class="display-1">Meet'N'Roll</h1>
-				<p>
-					Inscrivez vous dès aujourd'hui pour commencer une nouvelle aventure avec des milliers de PNJ partageant votre passion !!
-					(* : champs obligatoires)
-				</p>
+				
 			</center>
 	</div>
 	<div class="row">
@@ -52,6 +49,9 @@
 				<a class="btn btn-default btn-block" href="servlet/profil">Annuler</a>
 			</form>
 		</div>
+			<p>
+			(* : champs obligatoires)
+			</p>
 	</div>
 </body>
 </html>

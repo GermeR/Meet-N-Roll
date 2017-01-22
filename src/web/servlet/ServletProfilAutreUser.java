@@ -72,10 +72,14 @@ public class ServletProfilAutreUser extends HttpServlet {
 				rs = stmt.executeQuery(sql);
 				
 				if(rs.next()){
-					out.println("<h2>" + rs.getString(1)+ "</h2>");
-					out.println("<p>"+ rs.getString(3) +"</p>");
-					out.println("<p>"+ rs.getString(5) +"</p>");
-					out.println("<p>"+ rs.getString(6) +"</p>");
+					out.println("<table>");
+					
+					out.println("<th>" + rs.getString(1)+ "</th>");
+					out.println("<tr><td>Nom: </td><td>"+ rs.getString(5) +"</td></tr>");
+					out.println("<tr><td>Prenom: </td><td>"+ rs.getString(6) +"</td></tr>");
+					out.println("<tr><td>E-Mail: </td><td>"+ rs.getString(3) +"</td></tr>");
+					
+					out.println("</table>");
 				
 				}
 				

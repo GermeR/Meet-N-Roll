@@ -95,6 +95,7 @@ public class ServletProfil extends HttpServlet {
 							+ "</a></td></tr>");
 				out.println("</table>");
 
+				out.println("<a href=\"/Meet-N-Roll/modifProfil.jsp\" class=\"btn btn-primary\"role=\"button\">Modifier profil</a>");
 				out.print("</div></div>");
 				out.println("</body></html>");
 			} catch (
