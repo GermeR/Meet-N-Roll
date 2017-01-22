@@ -25,14 +25,18 @@ public class ServletLogin extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+
 		HttpSession session = req.getSession();
 		PrintWriter out = res.getWriter();
-		
+
 		if (req.getParameter("delog") != null && req.getParameter("delog").equals("true"))
 			session.invalidate();
-		
-		if(session==null) {
+
+		if (session == null)
+			System.out.println("session = null");
+		if (session.getAttribute("personne") == null)
+			System.out.println("personne = null");
+		if (session == null || session.getAttribute("personne") == null) {
 			res.sendRedirect("../login.html");
 		} else {
 			Connection con = null;

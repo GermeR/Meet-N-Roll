@@ -34,31 +34,42 @@ public class ServletModifProfil extends HttpServlet {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		Personne p = (Personne) session.getAttribute("personne");
 
-		if (!req.getParameter("mail").equals("")) {
-			try {
-				Class.forName("org.postgresql.Driver");
-				con = DriverManager.getConnection(URL, NOM, MDP);
-				stmt = con.createStatement();
-				session.setAttribute("personne", new Personne(p.getLogin(), req.getParameter("mail"),
-						Date.valueOf(req.getParameter("naiss")), req.getParameter("nom"), req.getParameter("prenom")));
-				stmt.executeUpdate("UPDATE personne " + "SET mail = '" + req.getParameter("mail") + "', naiss = '"
-						+ Date.valueOf(req.getParameter("naiss")) + "', nom = '" + req.getParameter("nom")
-						+ "', prenom = '" + req.getParameter("prenom") + "' WHERE login = '" + p.getLogin() + "'");
-				res.sendRedirect("../servlet/profil");
+		if (session == null)
+			System.out.println("session = null");
+		if (session.getAttribute("personne") == null)
+			System.out.println("personne = null");
+		if (session == null || session.getAttribute("personne") == null) {
+			res.sendRedirect("../login.html");
+		} else {
+			Personne p = (Personne) session.getAttribute("personne");
 
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
+			if (!req.getParameter("mail").equals("")) {
 				try {
-					con.close();
+					Class.forName("org.postgresql.Driver");
+					con = DriverManager.getConnection(URL, NOM, MDP);
+					stmt = con.createStatement();
+					session.setAttribute("personne",
+							new Personne(p.getLogin(), req.getParameter("mail"),
+									Date.valueOf(req.getParameter("naiss")), req.getParameter("nom"),
+									req.getParameter("prenom")));
+					stmt.executeUpdate("UPDATE personne " + "SET mail = '" + req.getParameter("mail") + "', naiss = '"
+							+ Date.valueOf(req.getParameter("naiss")) + "', nom = '" + req.getParameter("nom")
+							+ "', prenom = '" + req.getParameter("prenom") + "' WHERE login = '" + p.getLogin() + "'");
+					res.sendRedirect("../servlet/profil");
+
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
 				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						con.close();
+					} catch (SQLException e) {
+					}
 				}
-			}
-		} else
-			res.sendRedirect("../new.html");
+			} else
+				res.sendRedirect("../new.html");
+		}
 	}
 }

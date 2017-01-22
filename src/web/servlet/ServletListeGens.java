@@ -35,54 +35,53 @@ public class ServletListeGens extends HttpServlet {
 		Statement stmt = null;
 		ResultSet rs = null;
 
-		Personne p = (Personne) session.getAttribute("personne");
-		String sql = "SELECT * FROM personne where login !='" + p.getLogin() + "';";
+		if (session == null)
+			System.out.println("session = null");
+		if (session.getAttribute("personne") == null)
+			System.out.println("personne = null");
+		if (session == null || session.getAttribute("personne") == null) {
+			res.sendRedirect("../login.html");
+		} else {
 
-		out.println("<!DOCTYPE html>"
-				+ "<html lang=\"fr\">"
-				+ "<head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
-				+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
-				+ "<title>Creation de Compte</title>"
-				+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
-				+ "</head>"
-				+ "<body>"
-				+ "<div class=\"container\">"
-				+ "<div class=\"page-header\">"
-				+ "<center>"
-				+ "		<h1 class=\"display-1\">Meet'N'Roll : Profil</h1>"
-				+ "</center>"
-				+ "</div>"
-				+ "<div class=\"row\">"
-				+ "<div class=\"col-xs-6 col-xs-offset-3\">"
-				+ "<a href=\"profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
-				+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>"
-				+ "</div>"
-				+ "</div>"
-				+ "<div class=\"row\">"
-				+ "<div class=\"col-xs-6 col-xs-offset-3\">");
+			Personne p = (Personne) session.getAttribute("personne");
+			String sql = "SELECT * FROM personne where login !='" + p.getLogin() + "';";
 
-		try {
-			Class.forName("org.postgresql.Driver");
-			con = DriverManager.getConnection(URL, NOM, MDP);
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
+			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">"
+					+ "<head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
+					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
+					+ "<title>Creation de Compte</title>"
+					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
+					+ "</head>" + "<body>" + "<div class=\"container\">" + "<div class=\"page-header\">" + "<center>"
+					+ "		<h1 class=\"display-1\">Meet'N'Roll : Profil</h1>" + "</center>" + "</div>"
+					+ "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">"
+					+ "<a href=\"profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
+					+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>" + "</div>"
+					+ "</div>" + "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">");
 
-			out.println("<table class=\"table table-striped\">");
-			out.println("<th>Liste des gens</th>");
-			while (rs.next())
-				out.println("<tr><td><a href=\"profUser?user="+ rs.getString(1) +"\">"+ rs.getString(1) +"</a></td></tr>");
-			out.println("</table>");
-			out.print("</div></div>");
-			out.println("</body></html>");
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
 			try {
-				con.close();
+				Class.forName("org.postgresql.Driver");
+				con = DriverManager.getConnection(URL, NOM, MDP);
+				stmt = con.createStatement();
+				rs = stmt.executeQuery(sql);
+
+				out.println("<table class=\"table table-striped\">");
+				out.println("<th>Liste des gens</th>");
+				while (rs.next())
+					out.println("<tr><td><a href=\"profUser?user=" + rs.getString(1) + "\">" + rs.getString(1)
+							+ "</a></td></tr>");
+				out.println("</table>");
+				out.print("</div></div>");
+				out.println("</body></html>");
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
 			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					con.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 	}
