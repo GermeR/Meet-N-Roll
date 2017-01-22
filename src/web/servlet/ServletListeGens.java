@@ -54,7 +54,7 @@ public class ServletListeGens extends HttpServlet {
 				+ "</div>"
 				+ "<div class=\"row\">"
 				+ "<div class=\"col-xs-6 col-xs-offset-3\">"
-				+ "<a href=\"/servlet/profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
+				+ "<a href=\"profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
 				+ "</div>"
 				+ "</div>"
 				+ "<div class=\"row\">"
