@@ -105,7 +105,7 @@ public class ServletListeGens extends HttpServlet {
 					out.println("</div>");
 
 					sql = "SELECT login FROM joueurs where login !='" + p.getLogin()
-							+ "' and type = 'Heroic_Fantaisy';";
+							+ "' and type = '" + req.getParameter("type") + "';";
 					rs = stmt.executeQuery(sql);
 				}
 
