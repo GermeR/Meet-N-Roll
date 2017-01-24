@@ -44,14 +44,15 @@ public class ServletListeGens extends HttpServlet {
 		} else {
 
 			Personne p = (Personne) session.getAttribute("personne");
-			String sql = "SELECT * FROM personne where login !='" + p.getLogin() + "';";
+			
 
 			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">"
 					+ "<head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
 					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
 					+ "<title>Creation de Compte</title>"
 					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
-					+ "</head>" + "<body>" + "<div class=\"container\">" + "<div class=\"page-header\">" + "<center>"
+					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" + "</head>" + "<body>"
+					+ "<div class=\"container\">" + "<div class=\"page-header\">" + "<center>"
 					+ "		<h1 class=\"display-1\">Meet'N'Roll : Profil</h1>" + "</center>" + "</div>"
 					+ "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">"
 					+ "<a href=\"profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
@@ -62,7 +63,50 @@ public class ServletListeGens extends HttpServlet {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
 				stmt = con.createStatement();
-				rs = stmt.executeQuery(sql);
+				
+
+				if (req.getParameter("type") == null) {
+					
+					String sql = "SELECT * FROM personne where login !='" + p.getLogin() + "';";
+					rs = stmt.executeQuery(sql);
+					
+					out.println("<div id=\"menu\">");
+					out.println("<ul id=\"onglets\">");
+					out.println(
+							"<li class=\"active\"><a href=\"/Meet-N-Roll/servlet/listeGens\"> Tous les joueurs </a></li>");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/listeGens?type=hf\"> Heroic Fantaisy </a></li>");
+					out.println(
+							"<li><a href=\"/Meet-N-Roll/servlet/listeGens?type=mf\">  Medieval Fantastique </a></li>");
+					out.println("</ul>");
+					out.println("</div>");
+				} else if (req.getParameter("type").equals("hf")) {
+					
+					String sql = "SELECT login FROM joueurs where login !='" + p.getLogin() + "' and type = 'Heroic_Fantaisy';";
+					rs = stmt.executeQuery(sql);
+					
+					out.println("<div id=\"menu\">");
+					out.println("<ul id=\"onglets\">");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/listeGens\"> Tous les joueurs </a></li>");
+					out.println(
+							"<li class=\"active\"><a href=\"/Meet-N-Roll/servlet/listeGens?type=hf\"> Heroic Fantaisy </a></li>");
+					out.println(
+							"<li><a href=\"/Meet-N-Roll/servlet/listeGens?type=mf\">  Medieval Fantastique </a></li>");
+					out.println("</ul>");
+					out.println("</div>");
+				} else if (req.getParameter("type").equals("mf")) {
+					
+					String sql = "SELECT login FROM joueurs where login !='" + p.getLogin() + "' and type = 'Medieval_Fantastique';";
+					rs = stmt.executeQuery(sql);
+					
+					out.println("<div id=\"menu\">");
+					out.println("<ul id=\"onglets\">");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/listeGens\"> Tous les joueurs </a></li>");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/listeGens?type=hf\"> Heroic Fantaisy </a></li>");
+					out.println(
+							"<li class=\"active\"><a href=\"/Meet-N-Roll/servlet/listeGens?type=mf\">  Medieval Fantastique </a></li>");
+					out.println("</ul>");
+					out.println("</div>");
+				}
 
 				out.println("<table class=\"table table-striped\">");
 				out.println("<th>Liste des gens</th>");
