@@ -37,7 +37,7 @@ public class ServletLogin extends HttpServlet {
 		ResultSet rs = null;
 		String sql = "SELECT * FROM personne WHERE login='" + req.getParameter("login") + "' and password='"
 				+ req.getParameter("mdp") + "';";
-		out.println(sql);
+		//out.println(sql);
 
 		try {
 			Class.forName("org.postgresql.Driver");

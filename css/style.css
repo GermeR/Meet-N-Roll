@@ -30,3 +30,11 @@
 #onglets a:hover{
     background : #fff;
 }
+
+#Global #gauche {
+    float:left;
+    width:60%;
+}
+#Global #droite {
+    margin-left:60%   
+}

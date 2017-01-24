@@ -42,27 +42,20 @@ public class ServletProfil extends HttpServlet {
 			Connection con = null;
 			Statement stmt = null;
 			ResultSet rs = null;
-			String sql = "SELECT * FROM joueurs where login='" + p.getLogin() + "';";
-			out.println("<!DOCTYPE html>"
-					+ "<html lang=\"fr\">"
-					+ "<head><meta charset=\"utf-8\">"
+			String sql = null;
+
+			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">" + "<head><meta charset=\"utf-8\">"
 					+ "<meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
 					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
 					+ "<title>Creation de Compte</title>"
 					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
-					+ "</head>"
-					+ "<body>"
-					+ "<div class=\"container\">"
-					+ "<div class=\"page-header\">"
-					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center>"
-					+ "</div>"
+					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" + "</head>" + "<body>"
+					+ "<div class=\"container\">" + "<div class=\"page-header\">"
+					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center>" + "</div>"
 					+ "<div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\">"
 					+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>"
-					+ "<a href=\"log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a>"
-					+ "</div>"
-					+ "</div>"
-					+ "<div class=\"row\">"
-					+ "<div class=\"col-xs-6 col-xs-offset-3\">");
+					+ "<a href=\"log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a>" + "</div>"
+					+ "</div>" + "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">");
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
@@ -79,11 +72,39 @@ public class ServletProfil extends HttpServlet {
 					res.sendRedirect("profil");
 				}
 
+				sql = "SELECT * FROM personne where login='" + p.getLogin() + "';";
 				rs = stmt.executeQuery(sql);
+
+				out.println("<div id=\"Global\">");
+				// info sur le profil
+				out.println("<div id=\"gauche\">");
+				while (rs.next()) {
+					out.println("<table>");
+
+					out.println("<th>" + rs.getString(1) + "</th>");
+					out.println("<tr><td>Nom: </td><td>" + rs.getString(5) + "</td></tr>");
+					out.println("<tr><td>Prenom: </td><td>" + rs.getString(6) + "</td></tr>");
+					out.println("<tr><td>E-Mail: </td><td>" + rs.getString(3) + "</td></tr>");
+
+					out.println("</table>");
+
+					out.println(
+							"<a href=\"/Meet-N-Roll/modifProfil.jsp\" class=\"btn btn-primary\"role=\"button\">Modifier profil</a>");
+				}
+
+				out.println("</div>");
+
+				// jdr joués
+				out.println("<div id=\"droite\">");
+
 				out.println("<table class=\"table table-striped\">");
 				out.println("<th>JDR favoris</th>");
+				sql = "SELECT * FROM joueurs where login='" + p.getLogin() + "';";
+				rs = stmt.executeQuery(sql);
+
 				while (rs.next())
-					out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2)) +"</td></tr>");
+					out.println("<tr><td><a href =profil?del=" + rs.getString(2) + ">" + fromMatch(rs.getString(2))
+							+ "</td></tr>");
 				out.println("</table>");
 				sql = "select * from jeux where type not in (select type from joueurs where login ='" + p.getLogin()
 						+ "');";
@@ -94,8 +115,9 @@ public class ServletProfil extends HttpServlet {
 					out.println("<tr><td><a href=profil?add=" + rs.getString(1) + ">" + fromMatch(rs.getString(1))
 							+ "</a></td></tr>");
 				out.println("</table>");
+				out.println("</div>");
+				out.println("</div>");
 
-				out.println("<a href=\"/Meet-N-Roll/modifProfil.jsp\" class=\"btn btn-primary\"role=\"button\">Modifier profil</a>");
 				out.print("</div></div>");
 				out.println("</body></html>");
 			} catch (

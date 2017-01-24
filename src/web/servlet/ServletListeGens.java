@@ -52,7 +52,7 @@ public class ServletListeGens extends HttpServlet {
 					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
 					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" + "</head>" + "<body>"
 					+ "<div class=\"container\">" + "<div class=\"page-header\">" + "<center>"
-					+ "		<h1 class=\"display-1\">Meet'N'Roll : Profil</h1>" + "</center>" + "</div>"
+					+ "		<h1 class=\"display-1\">Meet'N'Roll : Rencontrez plus!</h1>" + "</center>" + "</div>"
 					+ "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">"
 					+ "<a href=\"profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
 					+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>" + "</div>"
