@@ -44,18 +44,39 @@ public class ServletProfil extends HttpServlet {
 			ResultSet rs = null;
 			String sql = null;
 
-			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">" + "<head><meta charset=\"utf-8\">"
+			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">" 
+					+ "<head><meta charset=\"utf-8\">"
 					+ "<meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
 					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
 					+ "<title>Creation de Compte</title>"
 					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
-					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" + "</head>" + "<body>"
-					+ "<div class=\"container\">" + "<div class=\"page-header\">"
-					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center>" + "</div>"
-					+ "<div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\">"
-					+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>"
-					+ "<a href=\"log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a>" + "</div>"
-					+ "</div>" + "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">");
+					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" 
+					+ "</head>" 
+					+ "<body>"
+					+ "<div class=\"container\">" 
+					+ "<div class=\"page-header\">"
+					+ "<center><h1 class=\"display-1\">Meet'N'Roll : Profil</h1></center>" 
+					+ "</div>");
+					
+					out.println("<div class=\"menu\">");
+					out.println("<ul class=\"onglets\">");
+					out.println("<li><a href=\"/Meet-N-Roll/menu.html\"> Menu </a></li>");
+					out.println("<li><a class=\"active\" href=\"/Meet-N-Roll/servlet/profil\"> Profil </a></li>");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/log?delog=true\"> Deconnexion </a></li>");
+					out.println("</ul>");
+					out.println("</div>");
+					
+					//+ "<div class=\"row\"><div class=\"col-xs-6 col-xs-offset-3\">"
+					//+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>"
+					//+ "<a href=\"log?delog=true\" class=\"btn btn-primary\"role=\"button\">Deconnexion</a>" + "</div>"
+					out.println("</div>" 
+					+ "<div class=\"row\">" 
+					+ "<div class=\"col-xs-6 col-xs-offset-3\">");
+			
+			
+			
+			
+			
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);

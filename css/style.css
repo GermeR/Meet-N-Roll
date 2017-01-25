@@ -1,4 +1,4 @@
-#onglets{
+.onglets{
     font : bold 11px Batang, arial, serif;
     list-style-type : none;
     padding-bottom : 24px; /* à modifier suivant la taille de la police ET de la hauteur de l'onglet dans #onglets li */
@@ -6,7 +6,7 @@
     margin-left : 0;
 }
 
-#onglets li{
+.onglets li{
     float : left;
     height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
     background-color: #F4F9FD;
@@ -15,19 +15,19 @@
     border : 1px solid #9EA0A1;
 }
 
-#onglets li.active{
+.onglets li.active{
     border-bottom: 1px solid #fff;
     background-color: #fff;
 }
 
-#onglets a{
+.onglets a{
     display : block;
     color : #666;
     text-decoration : none;
     padding : 4px;
 }
 
-#onglets a:hover{
+.onglets a:hover{
     background : #fff;
 }
 

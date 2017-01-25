@@ -45,31 +45,48 @@ public class ServletListeGens extends HttpServlet {
 
 			Personne p = (Personne) session.getAttribute("personne");
 
-			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">"
+			out.println("<!DOCTYPE html>" 
+					+ "<html lang=\"fr\">"
 					+ "<head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
 					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
 					+ "<title>Creation de Compte</title>"
 					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
-					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" + "</head>" + "<body>"
-					+ "<div class=\"container\">" + "<div class=\"page-header\">" + "<center>"
-					+ "		<h1 class=\"display-1\">Meet'N'Roll : Rencontrez plus!</h1>" + "</center>" + "</div>"
-					+ "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">"
-					+ "<a href=\"profil\" class=\"btn btn-primary\"role=\"button\">Profil</a>"
-					+ "<a href=\"/Meet-N-Roll/menu.html\" class=\"btn btn-primary\"role=\"button\">Menu</a>" + "</div>"
-					+ "</div>" + "<div class=\"row\">" + "<div class=\"col-xs-6 col-xs-offset-3\">");
+					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" 
+					+ "</head>" 
+					+ "<body>"
+					+ "<div class=\"container\">" 
+					+ "<div class=\"page-header\">" 
+					+ "<center>"
+					+ "		<h1 class=\"display-1\">Meet'N'Roll : Rencontrez plus!</h1>" 
+					+ "</center>" 
+					+ "</div>");
+					//+ "<div class=\"row\">" 
+					//+ "<div class=\"col-xs-6 col-xs-offset-3\">");
+			
+					out.println("<div class=\"menu\">");
+					out.println("<ul class=\"onglets\">");
+					out.println("<li><a href=\"/Meet-N-Roll/menu.html\"> Menu </a></li>");
+					out.println("<li><a class=\"active\" href=\"/Meet-N-Roll/servlet/profil\"> Profil </a></li>");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/log?delog=true\"> Deconnexion </a></li>");
+					out.println("</ul>");
+					out.println("</div>"); 
+					out.println("</div>"
+					+ "</div>" 
+					+ "<div class=\"row\">" 
+					+ "<div class=\"col-xs-6 col-xs-offset-3\">");
 
 			try {
 				Class.forName("org.postgresql.Driver");
 				con = DriverManager.getConnection(URL, NOM, MDP);
 				stmt = con.createStatement();
 
-				if (req.getParameter("type") == null) {
 
+				out.println("<div class=\"menu\">");
+				out.println("<ul class=\"onglets\">");
+				
+				if (req.getParameter("type") == null) {
 					String sql = "SELECT * FROM jeux;";
 					rs = stmt.executeQuery(sql);
-
-					out.println("<div id=\"menu\">");
-					out.println("<ul id=\"onglets\">");
 					out.println(
 							"<li class=\"active\"><a href=\"/Meet-N-Roll/servlet/listeGens\"> Tous les joueurs </a></li>");
 
@@ -88,8 +105,7 @@ public class ServletListeGens extends HttpServlet {
 					String sql = "SELECT * FROM jeux;";
 					rs = stmt.executeQuery(sql);
 
-					out.println("<div id=\"menu\">");
-					out.println("<ul id=\"onglets\">");
+					
 					out.println("<li><a href=\"/Meet-N-Roll/servlet/listeGens\"> Tous les joueurs </a></li>");
 
 					while (rs.next()) {
