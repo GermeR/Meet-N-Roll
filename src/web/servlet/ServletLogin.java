@@ -47,7 +47,7 @@ public class ServletLogin extends HttpServlet {
 			if (rs.next()) {
 				session.setAttribute("personne", new Personne(rs.getString(1), rs.getString(3), rs.getDate(4),
 						rs.getString(5), rs.getString(6)));
-				res.sendRedirect("../menu.html");
+				res.sendRedirect("/Meet-N-Roll/servlet/Menu");
 			} else
 				res.sendRedirect("../login.html");
 		} catch (ClassNotFoundException e) {

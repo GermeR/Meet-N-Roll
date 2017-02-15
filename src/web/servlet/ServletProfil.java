@@ -48,7 +48,7 @@ public class ServletProfil extends HttpServlet {
 					+ "<head><meta charset=\"utf-8\">"
 					+ "<meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"
 					+ "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\">"
-					+ "<title>Creation de Compte</title>"
+					+ "<title>Profil</title>"
 					+ "<link rel=\"stylesheet\"href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">"
 					+ "<link rel=\"stylesheet\"href=\"/Meet-N-Roll/css/style.css\">" 
 					+ "</head>" 
@@ -60,7 +60,7 @@ public class ServletProfil extends HttpServlet {
 					
 					out.println("<div class=\"menu\">");
 					out.println("<ul class=\"onglets\">");
-					out.println("<li><a href=\"/Meet-N-Roll/menu.html\"> Menu </a></li>");
+					out.println("<li><a href=\"/Meet-N-Roll/servlet/Menu\"> Menu </a></li>");
 					out.println("<li><a class=\"active\" href=\"/Meet-N-Roll/servlet/profil\"> Profil </a></li>");
 					out.println("<li><a href=\"/Meet-N-Roll/servlet/log?delog=true\"> Deconnexion </a></li>");
 					out.println("</ul>");
