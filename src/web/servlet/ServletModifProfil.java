@@ -23,7 +23,7 @@ public class ServletModifProfil extends HttpServlet {
 
 	static final String NOM = "kwin";
 	static final String MDP = "moi";
-	static final String URL = "jdbc:postgresql://kwinserv.ddns.net:22042/MeetNRoll";
+	static final String URL = "jdbc:postgresql://kwinserv.ddns.net:80/MeetNRoll";
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
