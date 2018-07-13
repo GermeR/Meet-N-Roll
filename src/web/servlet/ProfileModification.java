@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import web.struct.Personne;
+import types.UserType;
 
 @WebServlet("/servlet/modifProfil")
-public class ServletModifProfil extends HttpServlet
+public class ProfileModification extends HttpServlet
 {
 
 	private static final long serialVersionUID = 4530370119054454583L;
@@ -55,7 +55,7 @@ public class ServletModifProfil extends HttpServlet
 		}
 		else
 		{
-			Personne p = (Personne) session.getAttribute("personne");
+			UserType p = (UserType) session.getAttribute("personne");
 
 			if (!request.getParameter("mail").equals(""))
 			{
@@ -69,7 +69,7 @@ public class ServletModifProfil extends HttpServlet
 							+ request.getParameter("nom") + "', prenom = '" + request.getParameter("prenom")
 							+ "' WHERE login = '" + p.getLogin() + "'");
 					session.setAttribute("personne",
-							new Personne(p.getLogin(), request.getParameter("mail"),
+							new UserType(p.getLogin(), request.getParameter("mail"),
 									Date.valueOf(request.getParameter("naiss")), request.getParameter("nom"),
 									request.getParameter("prenom")));
 					response.sendRedirect("../servlet/profil");

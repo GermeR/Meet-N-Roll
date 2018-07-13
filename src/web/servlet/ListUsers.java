@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import web.struct.Personne;
+import types.UserType;
 
 @WebServlet("/servlet/listeGens")
-public class ServletListeGens extends HttpServlet
+public class ListUsers extends HttpServlet
 {
 
 	private static final long serialVersionUID = 1L;
@@ -53,7 +53,7 @@ public class ServletListeGens extends HttpServlet
 		else
 		{
 
-			Personne p = (Personne) session.getAttribute("personne");
+			UserType p = (UserType) session.getAttribute("personne");
 
 			out.println("<!DOCTYPE html>" + "<html lang=\"fr\">"
 					+ "<head><meta charset=\"utf-8\"><meta content=\"IE=edge\" http-equiv=\"X-UA-Compatible\">"

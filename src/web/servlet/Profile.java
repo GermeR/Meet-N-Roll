@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import web.struct.Personne;
+import types.UserType;
 
 @WebServlet("/servlet/profil")
-public class ServletProfil extends HttpServlet
+public class Profile extends HttpServlet
 {
 
 	private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class ServletProfil extends HttpServlet
 		else
 		{
 
-			Personne p = ((Personne) session.getAttribute("personne"));
+			UserType p = ((UserType) session.getAttribute("personne"));
 
 			Connection connection = null;
 			Statement statement = null;

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/servlet/profUser")
-public class ServletProfilAutreUser extends HttpServlet
+public class OtherUsersProfile extends HttpServlet
 {
 
 	private static final long serialVersionUID = 1L;

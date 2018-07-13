@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import web.struct.Personne;
+import types.UserType;
 
-@WebServlet("/servlet/singup")
-public class ServletSingUp extends HttpServlet
+@WebServlet("/servlet/log")
+public class Login extends HttpServlet
 {
 
 	private static final long serialVersionUID = 1L;
@@ -29,39 +29,38 @@ public class ServletSingUp extends HttpServlet
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
-
-		HttpSession session = request.getSession();
-		// PrintWriter out = response.getWriter();
-
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		String querry = "SELECT * FROM personne WHERE login='" + request.getParameter("login") + "';";
-
-		if (!request.getParameter("login").equals("") && !request.getParameter("password").equals("")
-				&& !request.getParameter("mail").equals("")
-				&& request.getParameter("password").equals(request.getParameter("repassword")))
+		if (request != null)
 		{
+			HttpSession session = request.getSession();
+			// PrintWriter out = res.getWriter();
+
+			if (request.getParameter("delog") != null && request.getParameter("delog").equals("true") && session != null)
+			{
+				session.invalidate();
+			}
+			Connection connection = null;
+			Statement statement = null;
+			ResultSet resultSet = null;
+			String querry = "SELECT * FROM personne WHERE login='" + request.getParameter("login") + "' and password='"
+					+ request.getParameter("password") + "';";
+			// out.println(sql);
+
 			try
 			{
 				Class.forName("org.postgresql.Driver");
 				connection = DriverManager.getConnection(URL, NOM, MDP);
 				statement = connection.createStatement();
 				resultSet = statement.executeQuery(querry);
-				if (resultSet.next())
+				if (resultSet != null && resultSet.next())
 				{
-					session.setAttribute("personne",
-							new Personne(request.getParameter("login"), null, null, null, null));
+					session.setAttribute("personne", new UserType(resultSet.getString(1), resultSet.getString(3), resultSet.getDate(4),
+							resultSet.getString(5), resultSet.getString(6)));
+					response.sendRedirect("/Meet-N-Roll/servlet/Menu");
 				}
 				else
 				{
-					statement.execute("insert into personne(login,nom,prenom,mail,naiss,password) values('"
-							+ request.getParameter("login") + "','" + request.getParameter("nom") + "','"
-							+ request.getParameter("prenom") + "','" + request.getParameter("mail") + "','"
-							+ request.getParameter("naiss") + "','" + request.getParameter("password") + "');");
+					response.sendRedirect("../login.html");
 				}
-				response.sendRedirect("../login.html");
-
 			}
 			catch (ClassNotFoundException e)
 			{
@@ -89,10 +88,6 @@ public class ServletSingUp extends HttpServlet
 					e.printStackTrace();
 				}
 			}
-		}
-		else
-		{
-			response.sendRedirect("../new.html");
 		}
 	}
 }
