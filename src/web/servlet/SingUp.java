@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import types.UserType;
+import utils.LoggerUtils;
 
 @WebServlet("/servlet/singup")
 public class SingUp extends HttpServlet
@@ -65,11 +66,11 @@ public class SingUp extends HttpServlet
 			}
 			catch (ClassNotFoundException e)
 			{
-				e.printStackTrace();
+				LoggerUtils.writeException(e);
 			}
 			catch (SQLException e)
 			{
-				e.printStackTrace();
+				LoggerUtils.writeException(e);
 			}
 			finally
 			{
@@ -86,7 +87,7 @@ public class SingUp extends HttpServlet
 				}
 				catch (SQLException e)
 				{
-					e.printStackTrace();
+					LoggerUtils.writeException(e);
 				}
 			}
 		}

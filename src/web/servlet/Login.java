@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import types.UserType;
+import utils.LoggerUtils;
 
 @WebServlet("/servlet/log")
 public class Login extends HttpServlet
@@ -64,11 +65,11 @@ public class Login extends HttpServlet
 			}
 			catch (ClassNotFoundException e)
 			{
-				e.printStackTrace();
+				LoggerUtils.writeException(e);
 			}
 			catch (SQLException e)
 			{
-				e.printStackTrace();
+				LoggerUtils.writeException(e);
 			}
 			finally
 			{
@@ -85,7 +86,7 @@ public class Login extends HttpServlet
 				}
 				catch (SQLException e)
 				{
-					e.printStackTrace();
+					LoggerUtils.writeException(e);
 				}
 			}
 		}

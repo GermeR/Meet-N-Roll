@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import types.UserType;
+import utils.LoggerUtils;
+import utils.SessionUtils;
 
 @WebServlet("/servlet/profil")
 public class Profile extends HttpServlet
@@ -32,21 +34,11 @@ public class Profile extends HttpServlet
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 
-		// TODO changer methode de log
-		if (session == null)
-		{
-			System.out.println("session = null");
-		}
-		if (session.getAttribute("personne") == null)
-		{
-			System.out.println("personne = null");
-		}
-		if (session == null || session.getAttribute("personne") == null)
+		if (!SessionUtils.isSessionValide(session))
 		{
 			// TODO changer page de login pour afficher message personalisé
 			// ("vous avez ete deco")
 			response.sendRedirect("/Meet-N-Roll/login.html");
-
 		}
 		else
 		{
@@ -155,11 +147,11 @@ public class Profile extends HttpServlet
 
 			ClassNotFoundException e)
 			{
-				e.printStackTrace();
+				LoggerUtils.writeException(e);
 			}
 			catch (SQLException e)
 			{
-				e.printStackTrace();
+				LoggerUtils.writeException(e);
 			}
 			finally
 			{
@@ -176,7 +168,7 @@ public class Profile extends HttpServlet
 				}
 				catch (SQLException e)
 				{
-					e.printStackTrace();
+					LoggerUtils.writeException(e);
 				}
 			}
 		}

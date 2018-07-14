@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import utils.LoggerUtils;
+import utils.SessionUtils;
+
 @WebServlet("/servlet/Menu")
 public class Menu extends HttpServlet
 {
@@ -29,16 +32,7 @@ public class Menu extends HttpServlet
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 
-		// TODO changer methode de log
-		if (session == null)
-		{
-			System.out.println("session = null");
-		}
-		if (session.getAttribute("personne") == null)
-		{
-			System.out.println("personne = null");
-		}
-		if (session == null || session.getAttribute("personne") == null)
+		if (!SessionUtils.isSessionValide(session))
 		{
 			// TODO changer page de login pour afficher message personalisé
 			// ("vous avez ete deco")
@@ -76,7 +70,7 @@ public class Menu extends HttpServlet
 		}
 	}
 
-	private String lectureLogs()
+	private String lectureLogs() throws IOException
 	{
 		String rez = "";
 
@@ -110,7 +104,7 @@ public class Menu extends HttpServlet
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			LoggerUtils.writeException(e);
 		}
 		return rez;
 	}
